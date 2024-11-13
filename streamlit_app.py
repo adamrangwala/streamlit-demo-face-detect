@@ -13,9 +13,12 @@ st.title("OpenCV Deep Learning based Face Detection")
 example_images = [
     "sample/faces.jpg",
     "sample/dog.jpg",
-    "sample/IMG_9331.png",
+    "sample/IMG_9331.PNG",
     "sample/IMG_9021-2.jpg",
-    "sample/Oly_M5_MkIII_0019991.jpg"
+    "sample/Oly_M5_MkIII_0019991.jpg",
+    "sample/Katy_Trail_Gang.jpg",
+    "Tamarindo_Beach.jpg"
+    
     # Add more images here
 ]
 
