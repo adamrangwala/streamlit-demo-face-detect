@@ -7,7 +7,7 @@ import base64
 
 
 # Create application title
-st.title("OpenCV Deep Learning based Face Detection")
+st.title("OpenCV Deep Learning based Face Detection.. also deep sux at fantasy")
 
 # List of example images
 example_images = [
