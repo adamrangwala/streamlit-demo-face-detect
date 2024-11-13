@@ -17,7 +17,7 @@ example_images = [
     "sample/IMG_9021-2.jpg",
     "sample/Oly_M5_MkIII_0019991.jpg",
     "sample/Katy_Trail_Gang.jpg",
-    "Tamarindo_Beach.jpg"
+    "sample/Tamarindo_Beach.jpg"
     
     # Add more images here
 ]
