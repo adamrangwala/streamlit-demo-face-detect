@@ -42,8 +42,10 @@ else:
 #Create placeholders to display input and output images (blurring).
 placeholders_blurring = st.columns(2)
 
-#Create Pre-Preprocessing Code
-kernel_size = 3
+# Create Slider 
+kernel_size = st.slider("Blur before face detection?", min_value=3, max_value=10, step=1, value=3)
+
+# Pre-Preprocessing Code
 image = cv2.blur(image_source, (kernel_size, kernel_size))
 
 # Display Input image in the first placeholder.
@@ -55,7 +57,6 @@ placeholders_blurring[1].image(image, channels="BGR")
 placeholders_blurring[1].text("Output Image")
 
 #Create slider for blurring as function of kernel size
-kernel_size = st.slider("Blur before face detection?", min_value=3, max_value=10, step=1, value=3)
 
 # Function to load the DNN model.
 @st.cache_resource()
