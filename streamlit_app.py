@@ -43,6 +43,7 @@ else:
 placeholders_blurring = st.columns(2)
 
 #Create Pre-Preprocessing Code
+kernel_size = 0.0
 image = cv2.blur(image_source, (kernel_size, kernel_size))
 
 # Display Input image in the first placeholder.
