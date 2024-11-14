@@ -43,7 +43,7 @@ else:
 placeholders_blurring = st.columns(2)
 
 # Create Slider 
-kernel_size = st.slider("Blur before face detection?", min_value=3, max_value=10, step=1, value=3)
+kernel_size = st.slider("Blur before face detection?", min_value=3, max_value=100, step=2, value=3)
 
 # Pre-Preprocessing Code
 image = cv2.blur(image_source, (kernel_size, kernel_size))
@@ -112,22 +112,6 @@ def get_image_download_link(img, filename, text):
     img_str = base64.b64encode(buffered.getvalue()).decode()
     href = f'<a href="data:file/txt;base64,{img_str}" download="{filename}">{text}</a>'
     return href
-
-
-# Handling of example selection
-if example_selection != "None":
-    # Load the selected example image
-    image = cv2.imread(example_selection, cv2.IMREAD_COLOR)
-else:
-    # File uploader for user's own image
-    img_file_buffer = st.file_uploader("Choose a file", type=["jpg", "jpeg", "png"])
-    if img_file_buffer is not None:
-        raw_bytes = np.asarray(bytearray(img_file_buffer.read()), dtype=np.uint8)
-        image = cv2.imdecode(raw_bytes, cv2.IMREAD_COLOR)
-    else:
-        # If no input provided
-        st.text("Please upload an image or select an example.")
-        st.stop()
 
 # Create placeholders to display input and output images.
 placeholders = st.columns(2)
