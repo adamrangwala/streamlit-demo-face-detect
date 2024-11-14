@@ -120,7 +120,7 @@ def get_image_download_link(img, filename, text):
 placeholders = st.columns(2)
 
 # Display Input image in the first placeholder.
-placeholders[0].image(image, channels="BGR")
+placeholders[0].image(image_source, channels="BGR")
 placeholders[0].text("Input Image")
 
 # Create a Slider and get the threshold from the slider.
