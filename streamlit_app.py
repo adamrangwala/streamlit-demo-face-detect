@@ -43,10 +43,13 @@ else:
 placeholders_blurring = st.columns(2)
 
 # Create Slider 
-kernel_size = st.slider("Blur before face detection?", min_value=3, max_value=100, step=2, value=3)
+kernel_size = st.slider("Blur before face detection?", min_value=0, max_value=100, step=1, value=0)
 
 # Pre-Preprocessing Code
-image = cv2.blur(image_source, (kernel_size, kernel_size))
+if kernel_size < 3:
+    image = image
+else:
+    image = cv2.blur(image_source, (kernel_size, kernel_size))
 
 # Display Input image in the first placeholder.
 placeholders_blurring[0].image(image_source, channels="BGR")
