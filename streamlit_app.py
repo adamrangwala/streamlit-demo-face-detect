@@ -7,7 +7,7 @@ import base64
 
 
 # Create application title
-st.title("OpenCV Deep Learning based Face Detection.. also deep sux at fantasy")
+st.title("OpenCV Deep Learning based Face Detection")
 
 # List of example images
 example_images = [
@@ -24,6 +24,36 @@ example_images = [
 
 # Add a select box for examples
 example_selection = st.selectbox("Choose an example image:", ["None"] + example_images)
+
+# Handling of example selection
+if example_selection != "None":
+    # Load the selected example image
+    image_source = cv2.imread(example_selection, cv2.IMREAD_COLOR)
+else:
+    # File uploader for user's own image
+    img_file_buffer = st.file_uploader("Choose a file", type=["jpg", "jpeg", "png"])
+    if img_file_buffer is not None:
+        raw_bytes = np.asarray(bytearray(img_file_buffer.read()), dtype=np.uint8)
+        image_source = cv2.imdecode(raw_bytes, cv2.IMREAD_COLOR)
+    else:
+        # If no input provided
+        st.text("Please upload an image or select an example.")
+        st.stop()
+        
+# Create placeholders to display input and output images (blurring).
+placeholders_blurring = st.columns(2)
+
+# Display Input image in the first placeholder.
+placeholders_blurring[0].image(image_source, channels="BGR")
+placeholders_blurring[0].text("Input Image")
+
+# Display Output image in 2nd placeholder
+placeholders_blurring[1].image(image, channels="BGR")
+placeholders_blurring[1].text("Output Image")
+
+# Create Pre-Preprocessing Code
+kernel_size = st.slider("Blur before face detection?", min_value=0.0, max_value=10.0, step=1, value=0.0)
+image = cv2.blur(image_source, (kernel_size, kernel_size))
 
 # Function to load the DNN model.
 @st.cache_resource()
