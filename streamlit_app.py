@@ -47,7 +47,7 @@ kernel_size = st.slider("Blur before face detection?", min_value=0, max_value=10
 
 # Pre-Preprocessing Code
 if kernel_size < 3:
-    image = image
+    image = image_source
 else:
     image = cv2.blur(image_source, (kernel_size, kernel_size))
 
