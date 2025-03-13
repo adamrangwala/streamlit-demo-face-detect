@@ -36,15 +36,34 @@ else:
         st.text("Please upload an image or select an example.")
         st.stop()
 
+def histogram_equalization(image):
+    rgb_img = image
+
+    # convert from RGB color-space to YCrCb
+    ycrcb_img = cv2.cvtColor(rgb_img, cv2.COLOR_BGR2YCrCb)
+
+    # equalize the histogram of the Y channel
+    ycrcb_img[:, :, 0] = cv2.equalizeHist(ycrcb_img[:, :, 0])
+
+    # convert back to RGB color-space from YCrCb
+    equalized_img = cv2.cvtColor(ycrcb_img, cv2.COLOR_YCrCb2BGR)
+    return equalized_img
+    
 with st.sidebar:
+
+    # Checkbox for equalization
+    hist_on = st.checkbox("Equalize brightness", help="Histogram equalization spreads out intensity values, normally adding contrast to an image.") 
+    if hist_on:
+        image = histogram_equalization(image_source)
+    else: 
+        image = image_source
+    
     # Create Slider 
     kernel_size = st.slider("Blurring Kernel Size", min_value=0, max_value=100, step=1, value=0,  label_visibility="visible", help="Some blurring can help reduce noise and fine details, so the detection algorithm can focus on key facial features.")
     
     # Pre-Preprocessing Code
-    if kernel_size < 3:
-        image = image_source
-    else:
-        image = cv2.blur(image_source, (kernel_size, kernel_size))
+    if kernel_size > 3:
+        image = cv2.blur(image, (kernel_size, kernel_size))
 
 # Function to load the DNN model.
 @st.cache_resource()
