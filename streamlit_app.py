@@ -38,7 +38,7 @@ else:
 
 with st.sidebar:
     # Create Slider 
-    kernel_size = st.slider("Blur Preprocessing?", min_value=0, max_value=100, step=1, value=0,  label_visibility="visible", help="help info")
+    kernel_size = st.slider("Blurring Kernel Size", min_value=0, max_value=100, step=1, value=0,  label_visibility="visible", help="Blurring can help reduce noise and fine details, so the detection algorithm can focus on key facial features.")
     
     # Pre-Preprocessing Code
     if kernel_size < 3:
