@@ -35,27 +35,16 @@ else:
         # If no input provided
         st.text("Please upload an image or select an example.")
         st.stop()
-#Create placeholders to display input and output images (blurring).
-placeholders_blurring = st.columns(2)
 
-# Create Slider 
-kernel_size = st.slider("Blur before face detection?", min_value=0, max_value=100, step=1, value=0)
-
-# Pre-Preprocessing Code
-if kernel_size < 3:
-    image = image_source
-else:
-    image = cv2.blur(image_source, (kernel_size, kernel_size))
-
-# Display Input image in the first placeholder.
-placeholders_blurring[0].image(image_source, channels="BGR")
-placeholders_blurring[0].text("Input Image")
-
-#Display Output image in 2nd placeholder
-placeholders_blurring[1].image(image, channels="BGR")
-placeholders_blurring[1].text("Output Image")
-
-#Create slider for blurring as function of kernel size
+with st.sidebar:
+    # Create Slider 
+    kernel_size = st.slider("Blur Preprocessing?", min_value=0, max_value=100, step=1, value=0)
+    
+    # Pre-Preprocessing Code
+    if kernel_size < 3:
+        image = image_source
+    else:
+        image = cv2.blur(image_source, (kernel_size, kernel_size))
 
 # Function to load the DNN model.
 @st.cache_resource()
@@ -64,7 +53,6 @@ def load_model():
     configFile = "deploy.prototxt"
     net = cv2.dnn.readNetFromCaffe(configFile, modelFile)
     return net
-
 
 # Function for detecting faces in an image.
 def detectFaceOpenCVDnn(net, frame):
@@ -119,8 +107,9 @@ placeholders = st.columns(2)
 placeholders[0].image(image_source, channels="BGR")
 placeholders[0].text("Input Image")
 
-# Create a Slider and get the threshold from the slider.
-conf_threshold = st.slider("SET Confidence Threshold", min_value=0.0, max_value=1.0, step=0.01, value=0.5)
+with st.sidebar:
+    # Create a Slider and get the threshold from the slider.
+    conf_threshold = st.slider("SET Confidence Threshold", min_value=0.0, max_value=1.0, step=0.01, value=0.5)
 
 # call the load_model function for model loading.
 net = load_model()
