@@ -50,7 +50,7 @@ def histogram_equalization(image):
     return equalized_img
     
 with st.sidebar:
-
+    st.title("Modify original image to improve facial detection confidence")
     # Checkbox for equalization
     hist_on = st.checkbox("Equalize brightness", help="Histogram equalization spreads out intensity values, normally adding contrast to an image.") 
     if hist_on:
