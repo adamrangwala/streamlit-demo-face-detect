@@ -118,7 +118,7 @@ net = load_model()
 detections = detectFaceOpenCVDnn(net, image)
 
 # Process the detections based on the current confidence threshold.
-out_image, _ = process_detections(image, detections, conf_threshold=conf_threshold)
+out_image, _ = process_detections(image_source, detections, conf_threshold=conf_threshold)
 
 # Display Detected faces.
 placeholders[1].image(out_image, channels="BGR")
