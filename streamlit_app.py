@@ -67,7 +67,7 @@ with st.sidebar:
         image = image_source
     
     # Gamma Correction Slider
-    gamma = st.slider("Amount of gamma/exposure correction", min_value=0, max_value=2, step=.1, value=1, help="gamma<1: Brightens the image, useful for dark images. gamma=1: No change. gamma>1 Dakens the image, useful for overexposed images")
+    gamma = st.slider("Amount of gamma/exposure correction", min_value=0.0, max_value=2.0, step=.1, value=1, help="gamma<1: Brightens the image, useful for dark images. gamma=1: No change. gamma>1 Dakens the image, useful for overexposed images")
     image = adjust_gamma(image, gamma)
     
     # Create Slider 
