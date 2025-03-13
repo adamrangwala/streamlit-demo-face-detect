@@ -48,15 +48,27 @@ def histogram_equalization(image):
     # convert back to RGB color-space from YCrCb
     equalized_img = cv2.cvtColor(ycrcb_img, cv2.COLOR_YCrCb2BGR)
     return equalized_img
+
+def adjust_gamma(image, gamma=1.5):
+    invGamma = 1.0 / gamma
+    table = np.array([(i / 255.0) ** invGamma * 255 for i in range(256)]).astype("uint8")
+    return cv2.LUT(image, table)
+    
+
     
 with st.sidebar:
     st.title("Modify original image to improve facial detection confidence")
+   
     # Checkbox for equalization
     hist_on = st.checkbox("Equalize brightness", help="Histogram equalization spreads out intensity values, normally adding contrast to an image.") 
     if hist_on:
         image = histogram_equalization(image_source)
     else: 
         image = image_source
+    
+    # Gamma Correction Slider
+    gamma = st.slider("Amount of gamma/exposure correction", min_value=0, max_value=2, step=.1, value=1, help="gamma<1: Brightens the image, useful for dark images. gamma=1: No change. gamma>1 Dakens the image, useful for overexposed images")
+    image = adjust_gamma(image, gamma)
     
     # Create Slider 
     kernel_size = st.slider("Blurring Kernel Size", min_value=0, max_value=100, step=1, value=0,  label_visibility="visible", help="Some blurring can help reduce noise and fine details, so the detection algorithm can focus on key facial features.")
