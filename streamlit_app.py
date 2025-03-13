@@ -38,7 +38,7 @@ else:
 
 with st.sidebar:
     # Create Slider 
-    kernel_size = st.slider("Blurring Kernel Size", min_value=0, max_value=100, step=1, value=0,  label_visibility="visible", help="Blurring can help reduce noise and fine details, so the detection algorithm can focus on key facial features.")
+    kernel_size = st.slider("Blurring Kernel Size", min_value=0, max_value=100, step=1, value=0,  label_visibility="visible", help="Some blurring can help reduce noise and fine details, so the detection algorithm can focus on key facial features.")
     
     # Pre-Preprocessing Code
     if kernel_size < 3:
@@ -109,7 +109,7 @@ placeholders[0].text("Processed Input Image")
 
 with st.sidebar:
     # Create a Slider and get the threshold from the slider.
-    conf_threshold = st.slider("SET Confidence Threshold", min_value=0.0, max_value=1.0, step=0.01, value=0.5)
+    conf_threshold = st.slider("SET Confidence Threshold", min_value=0.0, max_value=1.0, step=0.01, value=0.5, label_visibility="visible", help="The higher the confidence threshold, the more certain a face has been detected. Aim for 0.9+")
 
 # call the load_model function for model loading.
 net = load_model()
