@@ -104,8 +104,8 @@ def get_image_download_link(img, filename, text):
 placeholders = st.columns(2)
 
 # Display Input image in the first placeholder.
-placeholders[0].image(image_source, channels="BGR")
-placeholders[0].text("Input Image")
+placeholders[0].image(image, channels="BGR")
+placeholders[0].text("Processed Input Image")
 
 with st.sidebar:
     # Create a Slider and get the threshold from the slider.
@@ -122,7 +122,7 @@ out_image, _ = process_detections(image_source, detections, conf_threshold=conf_
 
 # Display Detected faces.
 placeholders[1].image(out_image, channels="BGR")
-placeholders[1].text("Output Image")
+placeholders[1].text("Original Image with Detections")
 
 # Convert opencv image to PIL.
 out_image = Image.fromarray(out_image[:, :, ::-1])
